@@ -40,6 +40,10 @@ class GenericOpenAiLLM {
     this.log(`Inference API: ${this.basePath} Model: ${this.model}`);
   }
 
+  get isO1Model() {
+    return this.model.toLowerCase().includes("o1") || this.model.toLowerCase().includes("gpt-5");
+  }
+
   log(text, ...args) {
     console.log(`\x1b[36m[${this.constructor.name}]\x1b[0m ${text}`, ...args);
   }
