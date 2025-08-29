@@ -160,14 +160,22 @@ class GenericOpenAiLLM {
   }
 
   async getChatCompletion(messages = null, { temperature = 0.7 }) {
+    const payload = {
+      model: this.model,
+      messages,
+    };
+
+    if (this.isO1Model) {
+      payload.max_completion_tokens = this.maxTokens;
+      payload.temperature = 1;
+    } else {
+      payload.max_tokens = this.maxTokens;
+      payload.temperature = temperature;
+    }
+
     const result = await LLMPerformanceMonitor.measureAsyncFunction(
       this.openai.chat.completions
-        .create({
-          model: this.model,
-          messages,
-          temperature,
-          max_tokens: this.maxTokens,
-        })
+        .create(payload)
         .catch((e) => {
           throw new Error(e.message);
         })
@@ -193,14 +201,22 @@ class GenericOpenAiLLM {
   }
 
   async streamGetChatCompletion(messages = null, { temperature = 0.7 }) {
+    const payload = {
+      model: this.model,
+      stream: true,
+      messages,
+    };
+
+    if (this.isO1Model) {
+      payload.max_completion_tokens = this.maxTokens;
+      payload.temperature = 1;
+    } else {
+      payload.max_tokens = this.maxTokens;
+      payload.temperature = temperature;
+    }
+
     const measuredStreamRequest = await LLMPerformanceMonitor.measureStream(
-      this.openai.chat.completions.create({
-        model: this.model,
-        stream: true,
-        messages,
-        temperature,
-        max_tokens: this.maxTokens,
-      }),
+      this.openai.chat.completions.create(payload),
       messages
       // runPromptTokenCalculation: true - There is not way to know if the generic provider connected is returning
       // the correct usage metrics if any at all since any provider could be connected.
