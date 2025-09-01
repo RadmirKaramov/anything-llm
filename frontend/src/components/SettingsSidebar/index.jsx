@@ -262,28 +262,29 @@ const SidebarOptions = ({ user = null, t }) => (
           btnText={t("settings.admin")}
           icon={<UserCircleGear className="h-5 w-5 flex-shrink-0" />}
           user={user}
+          roles={["admin"]}
           childOptions={[
             {
               btnText: t("settings.users"),
               href: paths.settings.users(),
-              roles: ["admin", "manager"],
+              roles: ["admin"],
             },
             {
               btnText: t("settings.workspaces"),
               href: paths.settings.workspaces(),
-              roles: ["admin", "manager"],
+              roles: ["admin"],
             },
             {
               hidden: !canViewChatHistory,
               btnText: t("settings.workspace-chats"),
               href: paths.settings.chats(),
               flex: true,
-              roles: ["admin", "manager"],
+              roles: ["admin"],
             },
             {
               btnText: t("settings.invites"),
               href: paths.settings.invites(),
-              roles: ["admin", "manager"],
+              roles: ["admin"],
             },
           ]}
         />
@@ -465,7 +466,7 @@ function AppVersion() {
       rel="noreferrer"
       className="text-theme-text-secondary light:opacity-80 opacity-50 text-xs mx-3"
     >
-      v{version}
+      version!!!!{version}
     </Link>
   );
 }

@@ -13,6 +13,10 @@ export default function MenuOption({
   hidden = false,
   isChild = false,
 }) {
+  if (roles.length > 0 && !roles.includes(user?.role)) {
+    return null;
+  }
+
   const storageKey = generateStorageKey({ key: btnText });
   const location = useLocation();
   const hasChildren = childOptions.length > 0;
