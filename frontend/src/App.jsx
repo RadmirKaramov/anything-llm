@@ -225,19 +225,19 @@ export default function App() {
                   />
                   <Route
                     path="/settings/workspace-chats"
-                    element={<ManagerRoute Component={GeneralChats} />}
+                    element={<AdminRoute Component={GeneralChats} />}
                   />
                   <Route
                     path="/settings/invites"
-                    element={<ManagerRoute Component={AdminInvites} />}
+                    element={<AdminRoute Component={AdminInvites} />}
                   />
                   <Route
                     path="/settings/users"
-                    element={<ManagerRoute Component={AdminUsers} />}
+                    element={<AdminRoute Component={AdminUsers} />}
                   />
                   <Route
                     path="/settings/workspaces"
-                    element={<ManagerRoute Component={AdminWorkspaces} />}
+                    element={<AdminRoute Component={AdminWorkspaces} />}
                   />
                   {/* Onboarding Flow */}
                   <Route path="/onboarding" element={<OnboardingFlow />} />
